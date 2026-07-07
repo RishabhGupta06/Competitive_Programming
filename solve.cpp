@@ -3,49 +3,48 @@
 using namespace std;
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
-	int t;
-	cin>>t;
-	while(t--){
-		int n;
-		cin>>n;
-		vector<int> arr(n);
-		for(int i=0;i<n;i++) cin>>arr[i];
-		if(n<4){
-			cout<<-1<<"\n";
-			continue;
-		}
-		int mine = 1;
-		int maxe =n;
-		int i =0,j = n-1;
-		while(i<j){
-			int flag =true;
-			if(arr[i] == mine) { 
-                mine++;
-                i++;
-                flag = false;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    int t;
+    cin >> t;
+    while(t--) {
+        int n;
+        cin >> n;
+        map<int,int> mp;
+        for(int i = 0; i < n; i++) {
+            int a;
+            cin >> a;
+            mp[a]++;
+        }
+        
+        int num = -1;
+        int prev_count = 0; // We need to remember the count of the previous element
+        int total_sets = 0; // This will just accumulate our answer
+        
+        for(auto x : mp) {
+            if(num == -1) { 
+                // Very first element: we must open 'x.second' sets
+                num = x.first;
+                total_sets += x.second;
             }
-            else if(arr[j] == mine) { 
-                mine++;
-                j--;
-                flag = false;
+            else {
+                // Condition 1: The sequence broke! 
+                if(1 != x.first - num) { 
+                    total_sets += x.second; // Must open brand new sets for all these dolls
+                } 
+                // Condition 2: Sequence continues, but we have EXTRA dolls
+                else if(x.second > prev_count) {
+                    total_sets += (x.second - prev_count);
+                }
+                
+                num = x.first;
             }
-            else if(arr[i] == maxe) {
-                maxe--;
-                i++;
-                flag = false;
-            }
-            else if(arr[j] == maxe) {
-                maxe--;
-                j--;
-                flag = false;
-            }
-			if(flag) {
-                cout << i + 1 << " " << j + 1 << "\n";
-                break;
-            }
-		}
-		if(i>=j) cout<<-1<<"\n";
-	}
+            // Update prev_count for the next loop iteration
+            prev_count = x.second;
+        }
+        
+        cout << total_sets << "\n";
+    }
+    return 0;
 }
