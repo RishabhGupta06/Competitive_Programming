@@ -2,88 +2,48 @@
 
 using namespace std;
 
-// Function to perform binary search on the prefix maximum array
-// Returns the largest index for which pmax[index] <= val
-int binSearch(vector<long long> &pmax, int n, int val)
-{
-	int low = 0, high = n - 1;
-	int ans = -1; // Initialize answer to -1
-
-	// Binary search loop
-	while (low <= high)
-	{
-		int mid = (low + high) / 2; // Calculate mid index
-
-		// Check if the current mid value is less than or equal to val
-		if (pmax[mid] <= val)
-		{
-			ans = mid; // Update answer
-			low = mid + 1; // Move to the right half
-		}
-		else
-		{
-			high = mid - 1; // Move to the left half
-		}
-	}
-
-	return ans; // Return the largest index found
-} // Time Complexity: O(log N)
-
 int main()
 {
-	int t; // Number of test cases
-	cin >> t;
+	int t;
+	cin >> t; // Read the number of test cases
 
 	while (t--)
 	{
-		int n, q; // Number of steps and number of queries
-		cin >> n >> q;
+		int n;
+		cin >> n; // Read the size of the set S
 
-		vector<long long> steps(n), query(q); // Vectors to store steps and queries
+		string s;
+		cin >> s; // Read the binary string representing set T
 
-		// Input the heights of the steps
-		for (int i = 0; i < n; i++)
-			cin >> steps[i]; // Time Complexity: O(N)
+		long long ans = 0; // Initialize the total cost to 0
 
-		// Input the queries
-		for (int i = 0; i < q; i++)
-			cin >> query[i]; // Time Complexity: O(N)
+		// Vector to keep track of removed elements, initialized to false
+		vector<bool> isRemoved(n + 1, false);
 
-		vector<long long> pmax(n), psum(n); // Vectors for prefix maximum and prefix sum
-		pmax[0] = steps[0]; // Initialize first element
-		psum[0] = steps[0]; // Initialize first element
-
-		// Calculate prefix maximum and prefix sum
-		for (int i = 1; i < n; i++)
+		// Iterate over each possible k from 1 to n
+		for (int i = 1; i <= n; i++)
 		{
-			pmax[i] = max(pmax[i - 1], steps[i]); // Update prefix maximum
-			psum[i] = psum[i - 1] + steps[i]; // Update prefix sum
-		} // Time Complexity: O(N)
-
-		// Process each query
-		for (int i = 0; i < q; i++)
-		{ // Time Complexity: O(q)
-			int val = query[i]; // Current query value
-
-			// Find the largest index where pmax[index] <= val
-			int ind = binSearch(pmax, n, val); // Time Complexity: O(log N)
-
-			// Output the result based on the index found
-			if (ind == -1)
+			// Iterate over multiples of k
+			for (int j = i; j <= n; j += i)
 			{
-				cout << "0 "; // If no such index, output 0
-			}
-			else
-			{
-				cout << psum[ind] << " "; // Output the prefix sum up to the found index
-			}
-		} // Time Complexity: O(q log N)
+				// If the current position in T is '1', stop further deletions
+				if (s[j - 1] == '1')
+					break;
 
-		cout << "\n"; // New line after each test case
+				// If the element is already removed, continue
+				if (isRemoved[j])
+					continue;
+				else
+				{
+					// Mark the element as removed and add the cost
+					isRemoved[j] = true;
+					ans += i;
+				}
+			}
+		} // End of O(n log n) loop
+
+		cout << ans << "\n"; // Output the minimum cost for the current test case
 	}
 
 	return 0;
 }
-
-// Total Time Complexity: O(N + q log N)
-// Total Space Complexity: O(N + q)
