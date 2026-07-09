@@ -20,7 +20,7 @@ int main()
 		vector<long long> diff(n);
 		for (int i = 0; i < n; i++)
 		{
-			diff[i] = arr1[i] - arr2[i]; // Positive = extra money, Negative = needs help
+			diff[i] = -arr1[i] + arr2[i]; // Positive = extra money, Negative = needs help
 		}
 
 		// Sort from poorest to richest
