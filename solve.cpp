@@ -10,40 +10,44 @@ int main()
 	while (t--)
 	{
 		int n;
-		cin >> n; // Read the size of the set S
-
-		string s;
-		cin >> s; // Read the binary string representing set T
-
-		long long ans = 0; // Initialize the total cost to 0
-
-		// Vector to keep track of removed elements, initialized to false
-		vector<bool> isRemoved(n + 1, false);
-
-		// Iterate over each possible k from 1 to n
-		for (int i = 1; i <= n; i++)
+		cin >> n;
+		vector<long long> arr1(n);
+		vector<long long> arr2(n);
+		for (int i = 0; i < n; i++)
+			cin >> arr1[i];
+		for (int i = 0; i < n; i++)
+			cin >> arr2[i];
+		vector<long long> diff(n);
+		for (int i = 0; i < n; i++)
 		{
-			// Iterate over multiples of k
-			for (int j = i; j <= n; j += i)
+			diff[i] = arr1[i] - arr2[i]; // Positive = extra money, Negative = needs help
+		}
+
+		// Sort from poorest to richest
+		sort(diff.begin(), diff.end());
+
+		int ans = 0;
+		int L = 0;
+		int R = n - 1;
+
+		// Two-Pointer loop
+		while (L < R)
+		{
+			if (diff[L] + diff[R] >= 0)
 			{
-				// If the current position in T is '1', stop further deletions
-				if (s[j - 1] == '1')
-					break;
-
-				// If the element is already removed, continue
-				if (isRemoved[j])
-					continue;
-				else
-				{
-					// Mark the element as removed and add the cost
-					isRemoved[j] = true;
-					ans += i;
-				}
+				// The rich person (R) successfully covers the poor person (L)
+				ans++;
+				L++;
+				R--;
 			}
-		} // End of O(n log n) loop
+			else
+			{
+				// Even the richest available person can't cover person L.
+				// Person L has to stay home.
+				L++;
+			}
+		}
 
-		cout << ans << "\n"; // Output the minimum cost for the current test case
+		cout << ans << "\n";
 	}
-
-	return 0;
 }
