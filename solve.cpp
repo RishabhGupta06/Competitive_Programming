@@ -9,45 +9,41 @@ int main()
 
 	while (t--)
 	{
-		int n;
-		cin >> n;
-		vector<long long> arr1(n);
-		vector<long long> arr2(n);
-		for (int i = 0; i < n; i++)
-			cin >> arr1[i];
-		for (int i = 0; i < n; i++)
-			cin >> arr2[i];
-		vector<long long> diff(n);
-		for (int i = 0; i < n; i++)
+		long long n;
+		int m;
+		cin >> n >> m;
+		vector<int> a(m);
+		for (int i = 0; i < m; i++)
 		{
-			diff[i] = -arr1[i] + arr2[i]; // Positive = extra money, Negative = needs help
+			cin >> a[i];
 		}
-
-		// Sort from poorest to richest
-		sort(diff.begin(), diff.end());
-
-		int ans = 0;
-		int L = 0;
-		int R = n - 1;
-
-		// Two-Pointer loop
-		while (L < R)
+		sort(a.begin(), a.end());
+		vector<int> gaps;
+		for (int i = 1; i < m; i++)
 		{
-			if (diff[L] + diff[R] >= 0)
+			gaps.push_back(a[i] - a[i - 1]-1);
+		}
+		gaps.push_back((n - a[m - 1]) + a[0] - 1);
+		sort(gaps.rbegin(), gaps.rend());
+		int day = 0, save = 0;
+		for (int i = 0; i < gaps.size(); i++)
+		{
+			int curr = gaps[i] - 2 * day;
+			if (curr <= 0)
 			{
-				// The rich person (R) successfully covers the poor person (L)
-				ans++;
-				L++;
-				R--;
+				break; // Gap is fully infected, and all smaller gaps are too
+			}
+			else if (curr == 1)
+			{
+				save += 1;
+				day += 1; // Takes 1 day to secure
 			}
 			else
 			{
-				// Even the richest available person can't cover person L.
-				// Person L has to stay home.
-				L++;
+				save += (curr - 1);
+				day += 2; // Takes 2 days to secure both ends
 			}
 		}
-
-		cout << ans << "\n";
+		cout << n - save << "\n";
 	}
 }
