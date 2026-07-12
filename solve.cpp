@@ -2,26 +2,24 @@
 using namespace std;
 
 void solve() {
-    int n,s;
-    cin >> n>>s;
-	vector<int> arr(n);
-	for(int i =0;i<n;i++) cin>>arr[i];
+    int n, s;
+    cin >> n >> s;
+    vector<int> arr(n);
+    for(int i = 0; i < n; i++) cin >> arr[i];
 
+    // Shift to a 1-indexed prefix array initialized with 0
+    vector<int> pre(n + 1, 0);
+    for(int i = 0; i < n; i++){
+        pre[i + 1] = pre[i] + arr[i];
+    }
+    
+    // Check the final total sum
+    if(pre[n] < s){
+        cout << -1 << "\n";
+        return;
+    }
 
-	vector<int> pre(n);
-	pre[0] = arr[0];
-	for(int i =1;i<n;i++){
-		pre[i] = pre[i-1] + arr[i];
-	}
-	
-
-	if(pre[n-1] <s){
-		cout<<-1<<endl;
-		return;
-	}
-
-
-	int l = 1; // Pointers now start at 1
+    int l = 1; // Pointers now start at 1
     int maxlen = -1;
     
     for(int r = 1; r <= n; r++){
@@ -35,8 +33,9 @@ void solve() {
             maxlen = max(maxlen, r - l + 1);
         }
     }
-	if(maxlen == -1)cout<<maxlen<<endl;
-	else cout<<n -maxlen<<endl;
+    
+    if(maxlen == -1) cout << maxlen << "\n";
+    else cout << n - maxlen << "\n";
 }
 
 int main() {
