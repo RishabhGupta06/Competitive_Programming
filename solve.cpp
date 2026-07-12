@@ -2,43 +2,41 @@
 using namespace std;
 
 void solve() {
-    int n;
-    cin >> n;
+    int n,s;
+    cin >> n>>s;
+	vector<int> arr(n);
+	for(int i =0;i<n;i++) cin>>arr[i];
+
+
+	vector<int> pre(n);
+	pre[0] = arr[0];
+	for(int i =1;i<n;i++){
+		pre[i] = pre[i-1] + arr[i];
+	}
+	
+
+	if(pre[n-1] <s){
+		cout<<-1<<endl;
+		return;
+	}
+
+
+	int l = 1; // Pointers now start at 1
+    int maxlen = -1;
     
-    // Read as strings to handle inputs like "11100" correctly
-    vector<string> arr(n);
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
-    
-    int ans = 0;
-    
-    // i controls the "layer" depth
-    for (int i = 0; i < n / 2; i++) {
-        // j travels along the top edge of the current layer.
-        // It goes up to n - 1 - i to avoid double-counting the corners!
-        for (int j = i; j < n - 1 - i; j++) {
-            
-            // Extract the 4 cells in this rotational cycle
-            char c1 = arr[i][j];
-            char c2 = arr[j][n - 1 - i];
-            char c3 = arr[n - 1 - i][n - 1 - j];
-            char c4 = arr[n - 1 - j][i];
-            
-            // Count how many '1's exist in this specific group of 4
-            int ones = 0;
-            if (c1 == '1') ones++;
-            if (c2 == '1') ones++;
-            if (c3 == '1') ones++;
-            if (c4 == '1') ones++;
-            
-            int zeros = 4 - ones; // The rest must be '0's
-            
-            // Add the minimum cost to make all 4 identical
-            ans += min(ones, zeros);
+    for(int r = 1; r <= n; r++){
+        // The sum from index l to r is pre[r] - pre[l-1]
+        while(l <= r && pre[r] - pre[l - 1] > s) {
+            l++;
+        }
+        
+        if(pre[r] - pre[l - 1] == s){
+            // Because it's inclusive from l to r, length is r - l + 1
+            maxlen = max(maxlen, r - l + 1);
         }
     }
-    cout << ans << "\n";
+	if(maxlen == -1)cout<<maxlen<<endl;
+	else cout<<n -maxlen<<endl;
 }
 
 int main() {
