@@ -1,33 +1,45 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int main(){
-    long long n,m;
-    cin>>n>>m;
-    vector<long long> arr(n+1);
-    vector<long long > pre(n+1);
-    vector<long long> suff(n+1);
-    pre[0] = 0;
-    pre[1] = 0;
-    arr[0] = INT_MAX;
-    cin>>arr[1];
-    for(int i =2;i<n+1;i++){
-        cin>>arr[i];
-        if(arr[i]<arr[i-1]) pre[i] = abs(arr[i]-arr[i-1])+pre[i-1];
-        else pre[i] = pre[i-1];
-    }
-    suff[suff.size()-1] = 0;
-    for(int i =suff.size()-2;i>=1;i--){
-        if(arr[i]<arr[i+1]) suff[i] = abs(arr[i]-arr[i+1])+suff[i+1];
-        else suff[i] = suff[i+1];
 
-    }
-
-    for(int i =0;i<m;i++){
-        int a,b;
-        cin>>a>>b;
-        if(a<b){
-            cout<<pre[b] - pre[a]<<endl;
+int main() {
+    // Fast I/O
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    int t;
+    cin >> t;
+    while(t--) {
+        int n, sh, ss;
+        cin >> n >> sh >> ss;
+        
+        int sleep_time = sh * 60 + ss;
+        int ans = INT_MAX;
+        
+        // This will track the absolute earliest alarm of the day
+        int earliest_alarm = INT_MAX; 
+        
+        for(int i = 0; i < n; i++) {
+            int x, y;
+            cin >> x >> y;
+            int alarm_time = x * 60 + y;
+            
+            // Keep track of the earliest alarm we see for the "next day" scenario
+            earliest_alarm = min(earliest_alarm, alarm_time);
+            
+            // If the alarm is later today, calculate the difference
+            if (alarm_time >= sleep_time) {
+                ans = min(ans, alarm_time - sleep_time);
+            }
         }
-        else cout<<suff[b] - suff[a]<<endl;
+        
+        // If ans is STILL INT_MAX, it means all alarms are for the next day
+        if (ans == INT_MAX) {
+            int time_to_midnight = 1440 - sleep_time;
+            ans = time_to_midnight + earliest_alarm;
+        }
+        
+        // Print hours and minutes
+        cout << ans / 60 << " " << ans % 60 << "\n";
     }
+    return 0;
 }
