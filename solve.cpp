@@ -2,29 +2,31 @@
 using namespace std;
 
 void solve() {
-    int n,x,y;
-    cin>>n>>x>>y;
-    int mine = min(x,y);
-    int maxe = max(x,y);
-    if(mine !=0 || maxe == 0 || (n-1)%maxe != 0){
-        cout<<-1<<endl;
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
     }
-    else{
-int winner = 1; 
-        
-        for(int i = 1; i <= n - 1; i++){
-            // 1. We ALWAYS print the winner for game i
-            cout << winner << " ";
-            
-            // 2. If the current game is a multiple of maxe, 
-            //    it means this player just finished their required wins!
-            if (i % maxe == 0) {
-                // The new player stepping up for the next game (i + 1) is (i + 2)
-                winner = i + 2; 
-            }
+    
+    // The problem guarantees the input is already sorted, 
+    // so we don't even need to use sort()!
+    
+    // Use long long for count just in case the total cuts get massive
+    long long count = 0; 
+    
+    // Calculate our strict upper limit based on the smallest piece
+    int limit = (2 * arr[0]) - 1;
+    
+    for(int i = 1; i < n; i++){
+        // If the piece is larger than the limit, calculate the cuts instantly
+        if (arr[i] > limit) {
+            count += (arr[i]) / limit;
         }
-        cout << "\n";
     }
+    
+    cout << count << "\n";
 }
 
 int main() {
