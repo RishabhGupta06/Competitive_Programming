@@ -2,31 +2,31 @@
 using namespace std;
 
 void solve() {
-    int n;
-    cin >> n;
-    vector<int> arr(n);
-    
-    for(int i = 0; i < n; i++){
-        cin >> arr[i];
+    int a,b;
+    cin>>a>>b;
+    string s;
+    cin>>s;
+    vector<int> le(26,0);
+    for(int i =0;i<s.size();i++){
+        le[s[i] - 97]++;
     }
-    
-    // The problem guarantees the input is already sorted, 
-    // so we don't even need to use sort()!
-    
-    // Use long long for count just in case the total cuts get massive
-    long long count = 0; 
-    
-    // Calculate our strict upper limit based on the smallest piece
-    int limit = (2 * arr[0]) - 1;
-    
-    for(int i = 1; i < n; i++){
-        // If the piece is larger than the limit, calculate the cuts instantly
-        if (arr[i] > limit) {
-            count += (arr[i]) / limit;
+    if(le[0] == 0) for(int i =0;i<b;i++) cout<<'a';
+    else{
+        char c;
+        int j =0;
+        for (int i = 1; i <= b; i++)
+        {
+            int j =0;
+            for(j;j<a/b;j++){
+                if(le[j] != 0){
+                    le[j]--;
+                }
+                else break;
+            }
+            cout<<char('a'+j);
         }
     }
-    
-    cout << count << "\n";
+    cout<<endl;
 }
 
 int main() {
