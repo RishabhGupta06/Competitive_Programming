@@ -2,34 +2,20 @@
 using namespace std;
 
 void solve() {
-    int n;
-    cin >> n;
-    vector<int> w(n + 1);
-    
-    if (n % 2 != 0) {
-        cout << "NO\n";
-        return;
-    }
-    for (int i = 1; i <= n; i++) {
-        cin >> w[i];
-    }
-    
-    int a = 0; // Max of even indices
-    int b = INT_MAX; // Min of odd indices
-    
-    for (int z = 1; z <= n; z++) {
-        if (z % 2 == 1) {
-            b = min(b, w[z]);
-        } else { 
-            a = max(a, w[z]);
+
+    vector<string> arr(8);
+    for(int i =0;i<8;i++){ cin>>arr[i];}
+
+for(int i = 0; i < 8; i++) {
+        if(arr[i] == "RRRRRRRR") {
+            cout << "R\n";
+            return; // We found the red stripe, we are done with this test case!
         }
     }
 
-    if (b - a > 1) {
-        cout << "YES\n";
-    } else {
-        cout << "NO\n";
-    }
+    // 4. If we checked all 8 rows and didn't find a solid red row, 
+    // it means a blue stripe (which is vertical) MUST have been drawn last.
+    cout << "B\n";
 }
 
 int main() {
