@@ -16,6 +16,8 @@ for(int i = 0; i < 8; i++) {
     // 4. If we checked all 8 rows and didn't find a solid red row, 
     // it means a blue stripe (which is vertical) MUST have been drawn last.
     cout << "B\n";
+
+    
 }
 
 int main() {
