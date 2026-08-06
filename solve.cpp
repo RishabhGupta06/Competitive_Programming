@@ -2,27 +2,32 @@
 using namespace std;
 
 void solve() {
-
-    vector<string> arr(8);
-    for(int i =0;i<8;i++){ cin>>arr[i];}
-
-for(int i = 0; i < 8; i++) {
-        if(arr[i] == "RRRRRRRR") {
-            cout << "R\n";
-            return; // We found the red stripe, we are done with this test case!
-        }
-    }
-
-    // 4. If we checked all 8 rows and didn't find a solid red row, 
-    // it means a blue stripe (which is vertical) MUST have been drawn last.
-    cout << "B\n";
-
+    int n;
+    cin >> n;
     
+    // Calculate the number of swaps needed
+    int m = (n + 1) / 2;
+    cout << m << "\n";
+    
+    // Left pointer starts at the first 'B' (index 1)
+    int left = 1;
+    
+    // Right pointer starts at the last 'N' (index 3*n)
+    int right = 3 * n;
+    
+    // Perform exactly 'm' swaps
+    for (int i = 0; i < m; i++) {
+        cout << left << " " << right << "\n";
+        
+        // Move to the next 'B' (jump over 'A' and 'N')
+        left += 3;
+        
+        // Move backward to the next 'N' (jump over 'A' and 'B')
+        right -= 3;
+    }
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     int t;
     cin >> t;
     while (t--) {
