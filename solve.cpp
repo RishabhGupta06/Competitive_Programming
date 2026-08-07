@@ -5,20 +5,14 @@ using namespace std;
 void solve() {
     int n;
     cin>>n;
-    vector<ll> time(n);
-    vector<ll> spell(n);
-    ll tsum =0; 
-    for(int i =0;i<n;i++){ 
-        cin>>time[i];
-        tsum += time[i];
+    if(n%2 != 0){
+        for(int i =0;i<n;i++) cout<<"7"<<" ";
+        cout<<endl;
     }
-    ll maxs = LLONG_MIN;
-    ll spells =0;
-    for(int i =0;i<n;i++){ cin>>spell[i];
-        maxs = max(maxs,spell[i]);
-        spells += spell[i];
+    else{
+        for(int i =0;i<n-2;i++) cout<<"2"<<" ";
+        cout<<"1"<<" "<<"3"<<endl;
     }
-    cout<< tsum + spells - maxs<<"\n";
 
 }
 
