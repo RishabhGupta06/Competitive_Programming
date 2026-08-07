@@ -1,30 +1,25 @@
 #include <bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 void solve() {
     int n;
     cin>>n;
-    vector<int> time(n);
-    vector<int> spell(n);
-    vector<pair<int,int>> r;
-    for(int i =0;i<n;i++) cin>>time[i];
-    for(int i =0;i<n;i++) cin>>spell[i];
-    for(int i =0;i<n;i++) r.push_back({spell[i],i});
-    sort(r.begin(),r.end());
-    int t =0;
-    for(int i =0;i<n;i++){
-        t += time[r[i].second];
-        int x = r[i].second;
-        if(x == 0){
-            time[1] += r[i].first;
-        }
-        else if(x == n-1) time[n-2] += r[i].first;
-        else {
-            time[x+1] += r[i].first;
-            time[x-1] += r[i].first;
-        }
+    vector<ll> time(n);
+    vector<ll> spell(n);
+    ll tsum =0; 
+    for(int i =0;i<n;i++){ 
+        cin>>time[i];
+        tsum += time[i];
     }
-    cout<<t<<"\n";
+    ll maxs = LLONG_MIN;
+    ll spells =0;
+    for(int i =0;i<n;i++){ cin>>spell[i];
+        maxs = max(maxs,spell[i]);
+        spells += spell[i];
+    }
+    cout<< tsum + spells - maxs<<"\n";
+
 }
 
 int main() {
