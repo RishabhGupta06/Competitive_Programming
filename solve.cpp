@@ -5,15 +5,21 @@ using namespace std;
 void solve() {
     int n;
     cin>>n;
-    if(n%2 != 0){
-        for(int i =0;i<n;i++) cout<<"7"<<" ";
-        cout<<endl;
-    }
-    else{
-        for(int i =0;i<n-2;i++) cout<<"2"<<" ";
-        cout<<"1"<<" "<<"3"<<endl;
-    }
+    vector<int> arr(n);
+    for(int i =0;i<n;i++) cin>>arr[i];
 
+    sort(arr.begin(),arr.end());
+    int ans =0;
+    for(int i =0;i<=n;i++){
+        if(i == n){
+            ans++;
+        }
+        else if(i == 0){
+            if(arr[i]>i) ans++;
+        }
+        else if(arr[i-1]<i && arr[i]>i) ans++;
+    }
+    cout<<ans<<endl;
 }
 
 int main() {
