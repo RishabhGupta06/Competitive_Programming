@@ -3,16 +3,17 @@
 using namespace std;
 
 void solve() {
-    int n;
-    cin>>n;
+    int n,k;
+    cin>>n>>k;
     vector<int> arr(n);
-    int a = 0;
-    
-    for(int i =0;i<n;i++){ cin>>arr[i];
-    a = __gcd(a,arr[i]);
+    for(int i =0;i<n;i++) cin>>arr[i];
+
+    int x =1;
+    for(int i =0;i<n;i++){
+        if(x == arr[i]) x++;
     }
-    sort(arr.begin(),arr.end());
-    cout<<arr[n-1]/a<<endl;
+    int ans = (n -x +k)/k;
+    cout<<ans<<endl;
 
 }
 
