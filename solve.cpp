@@ -3,18 +3,31 @@
 using namespace std;
 
 void solve() {
-    int n,k;
-    cin>>n>>k;
+    int n;
+    cin>>n;
     vector<int> arr(n);
     for(int i =0;i<n;i++) cin>>arr[i];
 
-    int x =1;
-    for(int i =0;i<n;i++){
-        if(x == arr[i]) x++;
+    sort(arr.begin(),arr.end());
+    if (arr[0] == arr[n - 1]) {
+        // Cast to long long to prevent overflow: 10^5 * 10^5 = 10^10
+        cout << (long long)n * (n - 1) << "\n";
+        return; 
     }
-    int ans = (n -x +k)/k;
-    cout<<ans<<endl;
+    long long first = 0,second =0;
+    int i =0, j =n-1;
+    while(arr[i] == arr[0] || arr[j] == arr[n-1]){
+        if(arr[j] == arr[n-1]){
+            second++;
+            j--;
+        }
+        if(arr[i] == arr[0]){
+            first++;
+            i++;
+        }
+    }
 
+     cout<<(first*second)*2<<endl;
 }
 
 int main() {
