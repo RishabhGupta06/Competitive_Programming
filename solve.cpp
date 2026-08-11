@@ -3,10 +3,16 @@
 using namespace std;
 
 void solve() {
-    string s;
-    cin>>s;
-    if(s[1] == 'a') cout<<s[0]<<" "<<s[1]<<" "<<s.substr(2)<<endl;
-    else cout<<s[0]<<" "<<s.substr(1,s.size()-2)<<" "<<s[s.size() -1]<<endl;
+    long long n;
+    cin>>n;
+    long long x = (n*(n-1))%1000000007;
+    long long fact =1;
+    for (int i = 1; i <= n; i++)
+    {
+        fact =( fact*i)%1000000007;
+    }
+    cout<<(fact*x)%1000000007<<endl;
+
 }
 
 int main() {
