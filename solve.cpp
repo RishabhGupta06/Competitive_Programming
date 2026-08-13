@@ -4,36 +4,22 @@ using namespace std;
 
 void solve()
 {
-    long long n;
-    cin >> n;
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
+    int n;
+    cin>>n;
+    if(n%2 == 0){
+        cout<<"Yes"<<endl;
+        for(int i =0;i<n/2;i++) cout<<1<<" "<<-1<<" ";
+        cout<<endl;
     }
-
-    for (int i = 0; i < n; i++)
-    {
-        int low = 1;
-        int high = i + 1;
-        int best_d = 1;
-
-        while (low <= high)
-        {
-            int mid = low + (high - low) / 2;
-            if (arr[i - mid + 1] >= mid)
-            {
-                best_d = mid;
-                low = mid + 1;
-            }
-            else
-            {
-                high = mid - 1;
-            }
+    else{
+        if(n>3){
+            cout<<"Yes"<<endl;
+            int k = (n-1)/2;
+            for(int i =0;i<k;i++) cout<<k-1<<" "<<-k<<" ";
+            cout<<k-1<<endl;
         }
-        cout<<best_d<<" ";
+        else cout<<"No"<<endl;
     }
-    cout<<"\n";
 }
 
 int main()
