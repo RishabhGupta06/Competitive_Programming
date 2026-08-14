@@ -6,20 +6,21 @@ void solve()
 {
     int n;
     cin>>n;
-    if(n%2 == 0){
-        cout<<"Yes"<<endl;
-        for(int i =0;i<n/2;i++) cout<<1<<" "<<-1<<" ";
-        cout<<endl;
+    vector<int> arr(n);
+    for(int i =0;i<arr.size();i++){
+        cin>>arr[i];
     }
-    else{
-        if(n>3){
-            cout<<"Yes"<<endl;
-            int k = (n-1)/2;
-            for(int i =0;i<k;i++) cout<<k-1<<" "<<-k<<" ";
-            cout<<k-1<<endl;
+for(int i =0;i<n;i++){
+            if(arr[i] == 1) arr[i]++;
         }
-        else cout<<"No"<<endl;
+
+    for(int i =1;i<n;i++){
+        if((arr[i]%arr[i-1] == 0)){
+            arr[i]++;
+        }
     }
+    for(int i =0;i<n;i++) cout<<arr[i]<<" ";
+    cout<<endl;
 }
 
 int main()
