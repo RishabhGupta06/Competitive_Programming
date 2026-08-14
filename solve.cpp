@@ -4,23 +4,19 @@ using namespace std;
 
 void solve()
 {
-    int n;
-    cin>>n;
-    vector<int> arr(n);
-    for(int i =0;i<arr.size();i++){
-        cin>>arr[i];
+    int n,k;
+    cin>>n>>k;
+    bool flag = false;
+    bool flag1 = false;
+    for(int i =0;i<n;i++){
+        int l,r;
+        cin>>l>>r;
+        if(l == k) flag = true;
+        if(r == k) flag1 = true;
     }
-for(int i =0;i<n;i++){
-            if(arr[i] == 1) arr[i]++;
-        }
+    if(flag && flag1) cout<<"Yes"<<endl;
+    else cout<<"No"<<endl;
 
-    for(int i =1;i<n;i++){
-        if((arr[i]%arr[i-1] == 0)){
-            arr[i]++;
-        }
-    }
-    for(int i =0;i<n;i++) cout<<arr[i]<<" ";
-    cout<<endl;
 }
 
 int main()
