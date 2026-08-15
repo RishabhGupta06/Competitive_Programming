@@ -4,18 +4,22 @@ using namespace std;
 
 void solve()
 {
-    int n,k;
-    cin>>n>>k;
-    bool flag = false;
-    bool flag1 = false;
+    int n;
+    cin>>n;
+    vector<int> arr(n);
+    int z =0,o =0,t =0;
     for(int i =0;i<n;i++){
-        int l,r;
-        cin>>l>>r;
-        if(l == k) flag = true;
-        if(r == k) flag1 = true;
+        cin>>arr[i];
+        if(arr[i] == 0)  z++;
+        else if(arr[i] == 1) o++;
+        else t++;
     }
-    if(flag && flag1) cout<<"Yes"<<endl;
-    else cout<<"No"<<endl;
+
+    if(z<=(n+1)/2){
+        cout<<0<<endl;
+    }
+    else if(t>0 || (o==0 && t==0))cout<<1<<endl;
+    else cout<<2<<endl;
 
 }
 
