@@ -4,22 +4,26 @@ using namespace std;
 
 void solve()
 {
-    int n;
-    cin>>n;
-    vector<int> arr(n);
-    int z =0,o =0,t =0;
-    for(int i =0;i<n;i++){
+    int n,q;
+    cin>>n>>q;
+    vector<long long> arr(n+1);
+    vector<long long> pre(n+1,0);
+    for(int i =1;i<=n;i++){
         cin>>arr[i];
-        if(arr[i] == 0)  z++;
-        else if(arr[i] == 1) o++;
-        else t++;
+
+         pre[i] = pre[i-1] + arr[i];
+        
     }
 
-    if(z<=(n+1)/2){
-        cout<<0<<endl;
+    while(q--){
+        long long l,r,k;
+        cin>>l>>r>>k;
+        long long sum = pre[n];
+        sum -= (pre[r]-pre[l-1]);
+        sum += (r-l+1)*k;
+        if(sum%2 == 0) cout<<"No"<<endl;
+        else cout<<"Yes"<<endl;
     }
-    else if(t>0 || (o==0 && t==0))cout<<1<<endl;
-    else cout<<2<<endl;
 
 }
 
