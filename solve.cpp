@@ -1,23 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 void solve() {
-    int n,k;
-    cin >> n>>k;
+    int n;
+    cin >> n;
+    
+    vector<int> arr(n);
+    for(int i =0;i<n;i++) cin>>arr[i];
 
-    vector<int> arr(n+1,0);
-int bd =0;
-    for(int i =1 ;i <=n;i++){
-        cin>>arr[i];
+    for(int i =0;i<n;i++){
+        int lo = 0;
+        int hi = i;
+
+
+            
+            while(lo<hi){
+                
+                int mid =  (lo +hi)/2;
+    
+                if(arr[mid] < i - mid + 1) {
+                lo = mid + 1; 
+            } 
+            // If it is valid, we try to find a longer valid subsequence to the left.
+            else {
+                hi = mid;
+            }
+            }
+    
+    
+            cout<<i-lo+1<<" ";
+        }
         
-
-
-        if(abs(arr[i] - i)%k != 0 ) bd++;
-    }
-
-    if(bd == 0) cout<<0<<endl;
-    else if(bd == 2) cout<<1<<endl;
-    else cout<<-1<<endl;
-
+    cout<<endl;
 
 }
 
