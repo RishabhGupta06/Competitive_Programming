@@ -1,47 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-// Helper function to calculate the luckiness of a single number
-int getLuckiness(int n) {
-    int max_digit = 0;
-    int min_digit = 9;
-    
-    // Extract digits one by one
-    while (n > 0) {
-        int digit = n % 10;
-        max_digit = max(max_digit, digit);
-        min_digit = min(min_digit, digit);
-        n /= 10;
-    }
-    
-    return max_digit - min_digit;
-}
-
 void solve() {
-    int l, r;
-    cin >> l >> r;
-    
-    int best_number = l;
-    int best_score = -1;
+    int n,k;
+    cin >> n>>k;
 
-    for (int i = l; i <= r; i++) {
-        int current_score = getLuckiness(i);
+    vector<int> arr(n+1,0);
+int bd =0;
+    for(int i =1 ;i <=n;i++){
+        cin>>arr[i];
         
-        if (current_score > best_score) {
-            best_score = current_score;
-            best_number = i;
-        }
-        
-        // THE MAGIC SPEED BOOST: 
-        // 9 is the absolute maximum possible luckiness (9 - 0 = 9).
-        // Since we are guaranteed to find a 9 within any 100 consecutive numbers,
-        // we can stop searching immediately to prevent Time Limit Exceeded!
-        if (best_score == 9) {
-            break; 
-        }
+
+
+        if(abs(arr[i] - i)%k != 0 ) bd++;
     }
-    
-    cout << best_number << "\n";
+
+    if(bd == 0) cout<<0<<endl;
+    else if(bd == 2) cout<<1<<endl;
+    else cout<<-1<<endl;
+
+
 }
 
 int main() {
