@@ -2,23 +2,31 @@
 using namespace std;
 void solve() {
     int n;
-    cin >> n;
-
-    string s;
-    cin>>s;
-
-    int maxl = INT_MIN;
-    int le=0;
-    for(int i =1;i<n;i++){
-        if(s[i-1] == s[i]) le++;
-        else{
-            maxl = max(maxl, le);
-            le =0;
-        }
-    }
-    maxl = max(maxl, le);
+    cin>>n;
     
-    cout<<maxl+2<<endl;
+    vector<pair<long long,int>> arr;
+    for(int i =1;i<=n;i++){ 
+        long long x;
+        cin>>x;
+        if(i>x) arr.push_back({x,i});
+    }
+
+    long long ans = 0;
+    for(int i =arr.size()-1;i>=0;i--){
+        int lo = 0;
+        int hi = i-1;
+        long long z = arr[i].first;
+        while(lo<=hi){
+            int mid = lo +(hi - lo)/2;
+
+            if(arr[mid].second <z) lo = mid+1;
+            else hi = mid-1;
+        }
+        ans += hi+1;
+    }
+    
+    cout<<ans<<endl;
+
 
 }
 
@@ -33,5 +41,5 @@ int main() {
         solve();
     }
     
-    // return 0;
+    // return 1;
 }
