@@ -3,34 +3,22 @@ using namespace std;
 void solve() {
     int n;
     cin >> n;
-    
-    vector<int> arr(n);
-    for(int i =0;i<n;i++) cin>>arr[i];
 
-    for(int i =0;i<n;i++){
-        int lo = 0;
-        int hi = i;
+    string s;
+    cin>>s;
 
-
-            
-            while(lo<hi){
-                
-                int mid =  (lo +hi)/2;
-    
-                if(arr[mid] < i - mid + 1) {
-                lo = mid + 1; 
-            } 
-            // If it is valid, we try to find a longer valid subsequence to the left.
-            else {
-                hi = mid;
-            }
-            }
-    
-    
-            cout<<i-lo+1<<" ";
+    int maxl = INT_MIN;
+    int le=0;
+    for(int i =1;i<n;i++){
+        if(s[i-1] == s[i]) le++;
+        else{
+            maxl = max(maxl, le);
+            le =0;
         }
-        
-    cout<<endl;
+    }
+    maxl = max(maxl, le);
+    
+    cout<<maxl+2<<endl;
 
 }
 
@@ -45,5 +33,5 @@ int main() {
         solve();
     }
     
-    return 0;
+    // return 0;
 }
