@@ -1,33 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 void solve() {
-    int n;
-    cin>>n;
-    
-    vector<pair<long long,int>> arr;
-    for(int i =1;i<=n;i++){ 
-        long long x;
-        cin>>x;
-        if(i>x) arr.push_back({x,i});
-    }
+    int Ax,Ay,Bx,By,Cx,Cy;
+    cin>>Ax>>Ay>>Bx>>By>>Cx>>Cy;
 
-    long long ans = 0;
-    for(int i =arr.size()-1;i>=0;i--){
-        int lo = 0;
-        int hi = i-1;
-        long long z = arr[i].first;
-        while(lo<=hi){
-            int mid = lo +(hi - lo)/2;
+    int ans = 1;
 
-            if(arr[mid].second <z) lo = mid+1;
-            else hi = mid-1;
-        }
-        ans += hi+1;
+    if(Bx<Ax && Ax<Cx || Bx>Ax && Ax>Cx) ans+=0;
+    else {
+        ans += min(abs(Bx-Ax),abs(Cx-Ax));
     }
-    
+    if(By<Ay && Ay<Cy || By>Ay && Ay>Cy) ans+=0;
+    else {
+        ans += min(abs(By-Ay),abs(Cy-Ay));
+    }
     cout<<ans<<endl;
-
-
 }
 
 int main() {
