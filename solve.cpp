@@ -1,20 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 void solve() {
-    int Ax,Ay,Bx,By,Cx,Cy;
-    cin>>Ax>>Ay>>Bx>>By>>Cx>>Cy;
+    int x,y,k;
+    cin>>x>>y>>k;
+    vector<pair<int,int>> arr(k);
+    int r1,r2;
+    cin>>r1>>r2;
+    bool flag =false;
+    for(int i =0;i<k;i++){ cin>>arr[i].first>>arr[i].second;
+        if((arr[i].first+arr[i].second)%2 == (r1+r2)%2) flag = true;
 
-    int ans = 1;
-
-    if(Bx<Ax && Ax<Cx || Bx>Ax && Ax>Cx) ans+=0;
-    else {
-        ans += min(abs(Bx-Ax),abs(Cx-Ax));
     }
-    if(By<Ay && Ay<Cy || By>Ay && Ay>Cy) ans+=0;
-    else {
-        ans += min(abs(By-Ay),abs(Cy-Ay));
-    }
-    cout<<ans<<endl;
+    if(flag) cout<<"No"<<endl;
+    else cout<<"Yes"<<endl;
 }
 
 int main() {
