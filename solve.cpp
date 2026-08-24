@@ -1,18 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 void solve() {
-    int x,y,k;
-    cin>>x>>y>>k;
-    vector<pair<int,int>> arr(k);
-    int r1,r2;
-    cin>>r1>>r2;
-    bool flag =false;
-    for(int i =0;i<k;i++){ cin>>arr[i].first>>arr[i].second;
-        if((arr[i].first+arr[i].second)%2 == (r1+r2)%2) flag = true;
-
+    int n,k;
+    cin>>n>>k;
+    vector<long long> arr(n);
+    for(int i =0;i<n;i++){
+        cin>>arr[i];
     }
-    if(flag) cout<<"No"<<endl;
-    else cout<<"Yes"<<endl;
+    sort(arr.begin(),arr.end());
+int max_streak = 1;
+    int current_streak = 1;
+    for(int i = 1; i < n; i++){
+        // If the difference is valid, the streak grows!
+        if((arr[i] - arr[i-1]) <= k){
+            current_streak++;
+        } 
+        // If the gap is too big, the streak resets back to 1
+        else {
+            current_streak = 1;
+        }
+        
+        // Constantly update the maximum streak we've seen so far
+        max_streak = max(max_streak, current_streak);
+    }
+
+    cout<<n - max_streak<<endl;
 }
 
 int main() {
