@@ -1,30 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 void solve() {
-    int n,k;
-    cin>>n>>k;
-    vector<long long> arr(n);
+    int n;
+    cin>>n;
+    vector<int> arr(n);
+    long long sum =0;
+    for(int i =0;i<n;i++){ cin>>arr[i];
+        sum += arr[i];
+    }
+    // vector<int> ans(n);
+    bool flag = false;
     for(int i =0;i<n;i++){
-        cin>>arr[i];
-    }
-    sort(arr.begin(),arr.end());
-int max_streak = 1;
-    int current_streak = 1;
-    for(int i = 1; i < n; i++){
-        // If the difference is valid, the streak grows!
-        if((arr[i] - arr[i-1]) <= k){
-            current_streak++;
-        } 
-        // If the gap is too big, the streak resets back to 1
-        else {
-            current_streak = 1;
+        if(sum >0 && n != 1){        
+        if(i == n-1){
+            if(sum == arr[i]) flag = true;
+            sum -= sum;
+            // cout<< sum<<endl;
         }
-        
-        // Constantly update the maximum streak we've seen so far
-        max_streak = max(max_streak, current_streak);
+        else if(arr[i] != 1) {
+            // arr[i] = 1;
+            sum -= 1;
+        }
+        else{
+            // arr[i] = 2;
+            sum -= 2;
+        }
     }
-
-    cout<<n - max_streak<<endl;
+    else {flag = true;
+    break;
+}
+    }
+    if(flag) cout<<"No"<<endl;
+    else cout<<"Yes"<<endl;
 }
 
 int main() {
