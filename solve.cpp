@@ -2,27 +2,24 @@
 using namespace std;
 
 void solve(){
-    int n,m;
-    cin>>n>>m;
-    vector<int> arr(n);
-    for(int i =0;i<n;i++){
-        cin>>arr[i];
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    int max_l = INT_MAX;
+    int z =0;
+    int l =1;
+    for(int i =1;i<s.size();i++){
+        if(s[i] != s[i-1]){
+            l++;
+        }
+        if(i == n-1) break;
+        if(s[i] != s[i-1] && s[i] != s[i+1]){
+            if(s[i+1] == s[i-1]) z = 2;
+            else z = max(z,1);
+        }
     }
-
-    vector<int> fr(m+2,0);
-    for(int i =0;i<n;i++){
-        fr[arr[i]]++;
-    }
-    
-    vector<int> suff(m+2,0);
-    for(int i = m-1;i>0;i--){
-        suff[i] = suff[i+1]+fr[i+1];
-    }
-    int max_ans =0;
-    for(int i = 1;i<=m;i++){
-        max_ans = max((fr[i]+suff[i]+(2*i <= m ? fr[2*i] :0)),max_ans);
-    }
-    cout<<max_ans<<endl;
+    cout<<l-z<<endl;
 }
 
 int main() {
