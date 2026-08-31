@@ -4,22 +4,22 @@ using namespace std;
 void solve(){
     int n;
     cin>>n;
-    string s;
-    cin>>s;
-    int max_l = INT_MAX;
-    int z =0;
-    int l =1;
-    for(int i =1;i<s.size();i++){
-        if(s[i] != s[i-1]){
-            l++;
-        }
-        if(i == n-1) break;
-        if(s[i] != s[i-1] && s[i] != s[i+1]){
-            if(s[i+1] == s[i-1]) z = 2;
-            else z = max(z,1);
-        }
+    string a,b;
+    cin>>a>>b;
+    string suba1="",suba2 ="",subb1="",subb2 ="";
+    for(int i =0;i<n;i++){
+       if(i%2 == 0) suba1 += a[i];
+       else suba2 += a[i];
+       if(i%2 == 0) subb1 += b[i];
+       else{ subb2 += b[i];
     }
-    cout<<l-z<<endl;
+    }
+    sort(suba1.begin(),suba1.end());
+    sort(suba2.begin(),suba2.end());
+    sort(subb1.begin(),subb1.end());
+    sort(subb2.begin(),subb2.end());
+    if(suba1 == subb1 && suba2 == subb2) cout<<"Yes"<<endl;
+    else cout<<"No"<<endl;
 }
 
 int main() {
