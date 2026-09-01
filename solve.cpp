@@ -8,6 +8,7 @@ void solve(){
     if(n-1 == k) cout<<-1<<endl;
     else{
         int x = n - k;
+        
         int o = (x+1)/2;
         int z = x/2;
 
