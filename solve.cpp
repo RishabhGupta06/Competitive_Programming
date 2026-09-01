@@ -2,24 +2,33 @@
 using namespace std;
 
 void solve(){
-    int n;
-    cin>>n;
-    string a,b;
-    cin>>a>>b;
-    string suba1="",suba2 ="",subb1="",subb2 ="";
-    for(int i =0;i<n;i++){
-       if(i%2 == 0) suba1 += a[i];
-       else suba2 += a[i];
-       if(i%2 == 0) subb1 += b[i];
-       else{ subb2 += b[i];
+    int n,k;
+    cin>>n>>k;
+
+    if(n-1 == k) cout<<-1<<endl;
+    else{
+        int x = n - k;
+        int o = (x+1)/2;
+        int z = x/2;
+
+
+        int to = (n+1)/2;
+        int tz = n/2;
+
+        int ro = to - o;
+        int rz = tz - z;
+
+        for(int i =0;i< 1+ro;i++){
+            cout<<"1";
+        }
+        for(int i = 0;i<1+rz;i++) cout<<"0";
+
+        for(int i =2;i<x;i++){
+            if(i%2 == 0) cout<<"1";
+            else cout<<"0";
+        }
+        cout<<endl;
     }
-    }
-    sort(suba1.begin(),suba1.end());
-    sort(suba2.begin(),suba2.end());
-    sort(subb1.begin(),subb1.end());
-    sort(subb2.begin(),subb2.end());
-    if(suba1 == subb1 && suba2 == subb2) cout<<"Yes"<<endl;
-    else cout<<"No"<<endl;
 }
 
 int main() {
