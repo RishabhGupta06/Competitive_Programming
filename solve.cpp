@@ -2,31 +2,22 @@
 using namespace std;
 
 void solve(){
-    int n,k;
-    cin>>n>>k;
+    int n,k,m;
+    cin>>n>>k>>m;
 
-    if(n-1 == k) cout<<-1<<endl;
+    int window = 1;
+    int sum =0;
+    if(m<k) cout<<"No"<<endl;
     else{
-        int x = n - k;
-        
-        int o = (x+1)/2;
-        int z = x/2;
-
-
-        int to = (n+1)/2;
-        int tz = n/2;
-
-        int ro = to - o;
-        int rz = tz - z;
-
-        for(int i =0;i< 1+ro;i++){
-            cout<<"1";
-        }
-        for(int i = 0;i<1+rz;i++) cout<<"0";
-
-        for(int i =2;i<x;i++){
-            if(i%2 == 0) cout<<"1";
-            else cout<<"0";
+        cout<<"Yes"<<endl;
+        int sum =0;
+        for(int i =1;i<=n;i++){
+            if(i%k == 0){
+                cout<<m - (k-1)<<" ";
+            }
+            else{
+                cout<<1<<" ";
+            }
         }
         cout<<endl;
     }
