@@ -3,6 +3,14 @@ using namespace std;
 
 void solve(){
     int n;
+    cin>>n;
+    long long prod = 1;
+    int gcdi = 0;
+    for(int i =1;i<=n;i++){ prod *= i;
+    gcdi = __gcd(gcdi,i);
+}
+
+
 }
 
 int main() {
