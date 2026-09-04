@@ -1,31 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long lcm(long long a, long long b) {
-    return (a / __gcd(a, b)) * b;  // safer against overflow
-}
 
-// Function to compute LCM of numbers from 1 to n
-long long lcmFrom1ToN(int n) {
-    long long result = 1;
-    for (int i = 2; i <= n; i++) {
-        result = lcm(result, i);
-    }
-    return result;
-}
 void solve(){
     int n;
     cin>>n;
- int lcm = lcmFrom1ToN(n) ;
- int sum =0;
-for(int i =1;i<n;i++){
-    cout<<i<<" ";
-    sum += i;
+    long long sum = 3;
+    if(n== 2)cout<<-1<<endl;
+    else{
+    for(int i =1;i<=n;i++){
+        if(i<=2) cout<<i<<" ";
+        else{
+            cout<<sum<<" ";
+            sum += sum;
+        }
+    }
+    cout<<endl;
 }
-    
-cout<<lcm - sum<<endl;
-
-
 }
 
 int main() {
