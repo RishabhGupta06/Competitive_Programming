@@ -6,6 +6,9 @@ void solve(){
     int n;
     cin>>n;
     long long sum = 3;
+    
+
+    
     if(n== 2)cout<<-1<<endl;
     else{
     for(int i =1;i<=n;i++){
