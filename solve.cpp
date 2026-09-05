@@ -5,21 +5,26 @@ using namespace std;
 void solve(){
     int n;
     cin>>n;
-    long long sum = 3;
-    
 
-    
-    if(n== 2)cout<<-1<<endl;
-    else{
-    for(int i =1;i<=n;i++){
-        if(i<=2) cout<<i<<" ";
-        else{
-            cout<<sum<<" ";
-            sum += sum;
+
+    int n1 =0;
+    int n2 =0;
+    int n3 =0;
+
+
+    for(int i =0;i<n;i++){
+        int x;
+        cin>>x;
+
+        if(x%2 != 0){
+            n1++;
         }
+        else if(x%4 == 0) n3++;
+        else n2++;
     }
-    cout<<endl;
-}
+
+    cout<<max({n1,n2,n3})<<endl;
+
 }
 
 int main() {
