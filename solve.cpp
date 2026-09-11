@@ -6,19 +6,17 @@ void solve(){
     int n;
     cin>>n;
 
-    vector<int> arr(n);
 
-    int a = 0;
-    for(int i =0;i<n;i++){ cin>>arr[i];
-        a = __gcd(a,arr[i]);
+    int x =0, y =0, z = 0;
+    for(int i =0;i<n;i++){
+        int q,w,r;
+        cin>>q>>w>>r;
+        x += q;
+        y += w;
+        z +=r;
     }
-    
-    if(a == 1) cout<<0<<endl;
-    else if(__gcd(a,n) == 1) cout<<1<<endl;
-    else if(__gcd(a,n-1) ==1)cout<<2<<endl;
-    else cout<<3<<endl;
-    
-
+    if(x == 0 && y == 0 && z == 0) cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }
 
 int main() {
@@ -26,11 +24,11 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int t;
-    cin >> t;
-   while (t--) {
+    // int t;
+    // cin >> t;
+//    while (t--) {
         solve();
-    }
+    // }
     
     return 0;
 }
