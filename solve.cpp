@@ -3,20 +3,20 @@ using namespace std;
 
 
 void solve(){
-    int n;
-    cin>>n;
+    int a,b,c;
+    cin>>a>>b>>c;
 
+    int maxi = INT_MIN;
 
-    int x =0, y =0, z = 0;
-    for(int i =0;i<n;i++){
-        int q,w,r;
-        cin>>q>>w>>r;
-        x += q;
-        y += w;
-        z +=r;
-    }
-    if(x == 0 && y == 0 && z == 0) cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
+    maxi = max(a+b+c,maxi);
+    maxi = max((a*b)+c,maxi);
+    maxi = max(a+(b*c),maxi);
+    maxi = max(a+(b*c),maxi);
+    maxi = max(a*(b*c),maxi);
+    maxi = max((a+b)*c,maxi);
+    maxi = max(a*(b+c),maxi);
+
+    cout<<maxi<<endl;
 }
 
 int main() {
