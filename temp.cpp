@@ -2,20 +2,45 @@
 using namespace std;
 
 void solve() {
-    int n;
-    cin >> n;
-    
+    int n,k;
+    cin >> n >>k;
 
-    int o =0,z =0;
-    for(int i =0;i<n;i++){
-        int x;
-        cin>>x;
-        if(x == 1) o++;
-        else z++;
+    if(2*n>k &&  k>=n){
+        if(k == 2*n -1){
+            for(int i =1;i<=2*n;i++){
+                cout<<i<<" ";
+                if(i%n == 0) cout<<"\n";
+            }
+        }
+        else{
+            int l =1;
+            int g = 2*n;
+            for(int i =0;i<k;i++){
+                for(int j =0;j<n;j++){
+                    if(i ==j){
+                        cout<<l<<" ";
+                        l++;
+                    }
+                    cout<<g<<" ";
+                    g--;
+                }
+                cout<<"\n";
+            }
+            for (int i = k+1; i <= n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    cout<<g<<" ";
+                    g--;
+                }
+                cout<<endl;
+            }
+            
+            
+        }
     }
+    else cout<<-1<<endl;
 
-    if(z<=o) cout<<"Bessie"<<endl;
-    else cout<<"Elsie"<<endl;
 }
 
 int main() {
@@ -29,5 +54,5 @@ int main() {
         solve();
     }
     
-    return 0;
+    return 1;
 }
