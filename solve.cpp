@@ -3,20 +3,22 @@ using namespace std;
 
 
 void solve(){
-    int a,b,c;
-    cin>>a>>b>>c;
+    int n,l;
+    cin>>n>>l;
 
-    int maxi = INT_MIN;
+    vector<int> arr(n);
 
-    maxi = max(a+b+c,maxi);
-    maxi = max((a*b)+c,maxi);
-    maxi = max(a+(b*c),maxi);
-    maxi = max(a+(b*c),maxi);
-    maxi = max(a*(b*c),maxi);
-    maxi = max((a+b)*c,maxi);
-    maxi = max(a*(b+c),maxi);
+    for(int i =0;i<n;i++) cin>>arr[i];
 
-    cout<<maxi<<endl;
+    sort(arr.begin(),arr.end());
+
+    double maxi = arr[0] - 0;
+
+    for(int i =1;i<n;i++){
+        maxi = max((double)(arr[i]-arr[i-1])/2,maxi);
+    }
+    maxi = max((double)(l-arr[n-1]),maxi);
+    cout<<setprecision(10)<<maxi<<endl;
 }
 
 int main() {
