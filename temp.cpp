@@ -7,31 +7,35 @@ void solve() {
 
     if(2*n>k &&  k>=n){
         if(k == 2*n -1){
-            for(int i =1;i<=2*n;i++){
+            for(int i =1;i<=n*n;i++){
                 cout<<i<<" ";
                 if(i%n == 0) cout<<"\n";
             }
         }
         else{
             int l =1;
-            int g = 2*n;
-            for(int i =0;i<k;i++){
+            int x = (2 * n - k) + 1;
+            // int g = 2*n;
+            for(int i =0;i<(2*n-k);i++){
                 for(int j =0;j<n;j++){
-                    if(i ==j){
+                    if(i == j){
                         cout<<l<<" ";
                         l++;
                     }
-                    cout<<g<<" ";
-                    g--;
+                    else{
+                        cout<<x<<" ";
+                        x++;
+
+                    }
                 }
                 cout<<"\n";
             }
-            for (int i = k+1; i <= n; i++)
+            for (int i = 2*n-k; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    cout<<g<<" ";
-                    g--;
+                    cout<<x<<" ";
+                    x++;
                 }
                 cout<<endl;
             }
@@ -54,5 +58,5 @@ int main() {
         solve();
     }
     
-    return 1;
+    return 0;
 }
