@@ -2,49 +2,36 @@
 using namespace std;
 
 void solve() {
-    int n,k;
-    cin >> n >>k;
+    int n ;
+    cin>>n;
+    vector<int> arr(n+1);
 
-    if(2*n>k &&  k>=n){
-        if(k == 2*n -1){
-            for(int i =1;i<=n*n;i++){
-                cout<<i<<" ";
-                if(i%n == 0) cout<<"\n";
-            }
-        }
-        else{
-            int l =1;
-            int x = (2 * n - k) + 1;
-            // int g = 2*n;
-            for(int i =0;i<(2*n-k);i++){
-                for(int j =0;j<n;j++){
-                    if(i == j){
-                        cout<<l<<" ";
-                        l++;
-                    }
-                    else{
-                        cout<<x<<" ";
-                        x++;
+    for(int i =1;i<=n;i++) cin>>arr[i];
 
-                    }
-                }
-                cout<<"\n";
-            }
-            for (int i = 2*n-k; i < n; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    cout<<x<<" ";
-                    x++;
-                }
-                cout<<endl;
-            }
-            
-            
+    vector<bool> m(n,true);
+
+
+    for(int i =1;i<=n;i++){
+        long long start = arr[i]*i;
+        long long end = (arr[i]+1)*i;
+
+        for(long long j =start;j<end && j <n;j++){
+            m[j] = false;
         }
     }
-    else cout<<-1<<endl;
+    vector<int> ans;
+    for(int i =0;i<n;i++){
+        if(m[i] == true) ans.push_back(i);
+    }
 
+    cout<<ans.size()<<endl;
+
+    for(int i =0;i<ans.size();i++){
+        cout<<ans[i]<<" ";
+    }
+
+    cout<<endl;
+    
 }
 
 int main() {
