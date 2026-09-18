@@ -3,19 +3,20 @@ using namespace std;
 
 
 void solve(){
-    int n,l;
+    long long n,l;
     cin>>n>>l;
-
-    if(n<=l){
-        long long x = l/n;
-        l += x;
-        long long y = l/n;
-        l = l+y-x;
-        
-
-
+    if(l<n){
+        cout<<l<<endl;
     }
-    else cout<<l<<endl;
+    else{
+        long long x = l/(n-1);
+        if(l%(n-1) == 0)  x--;
+        
+    
+        long long y = x*n;
+    
+        cout<<y+(l-(x*(n-1)))<<endl;
+    }
     
 }
 
