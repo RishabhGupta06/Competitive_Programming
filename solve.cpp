@@ -9,13 +9,22 @@ void solve(){
         cout<<l<<endl;
     }
     else{
-        long long x = l/(n-1);
-        if(l%(n-1) == 0)  x--;
-        
-    
-        long long y = x*n;
-    
-        cout<<y+(l-(x*(n-1)))<<endl;
+        long long hi = 2 * 1000000000;
+        long long lo = 1;
+        int ans =0;
+        while(lo<=hi){
+            long long mid = lo + (hi -lo)/2;
+            
+            long long count = mid/n;
+            if(mid - count >= l){
+                // cout<< mid<<endl;
+                ans = mid;
+                hi = mid -1;
+            }
+            
+            else lo = mid+1;
+        }
+        cout<<ans<<"\n";
     }
     
 }
