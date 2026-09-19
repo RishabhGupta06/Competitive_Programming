@@ -3,19 +3,19 @@ using namespace std;
 
 
 void solve(){
-    int n;
-    cin>>n;
+    int n,k;
+    cin>>n>>k;
+    int x = n/2;
+    int m = x + (n - x*2);
+    if(n<k) cout<<-1<<endl;
+    else{
+        if(m %k == 0) cout<<m<<endl;
+        else{
+            int z = m%k;
+            cout<<m+k-z<<endl;
+        }
+    }
     
-    if(n ==0) {cout<<1<<endl;
-
-}
-else{
-    n = n%4;
-    if(n == 1) cout<<8<<endl;
-    else if(n == 2 ) cout<<4<<endl;
-    else if(n == 3) cout<<2<<endl;
-    else cout<<6<<endl;
-}
 }
 
 int main() {
