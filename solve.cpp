@@ -3,30 +3,27 @@ using namespace std;
 
 
 void solve(){
-    long long n,l;
-    cin>>n>>l;
-    if(l<n){
-        cout<<l<<endl;
-    }
-    else{
-        long long hi = 2 * 1000000000;
-        long long lo = 1;
-        int ans =0;
-        while(lo<=hi){
-            long long mid = lo + (hi -lo)/2;
-            
-            long long count = mid/n;
-            if(mid - count >= l){
-                // cout<< mid<<endl;
-                ans = mid;
-                hi = mid -1;
-            }
-            
-            else lo = mid+1;
+    int n,k;
+    cin>>n>>k;
+
+    int even =0;
+    int ans =INT_MAX;
+    for(int i =0;i<n;i++){
+        int x;
+        cin>>x;
+
+        if(x%2 ==0) even++;
+
+        if(x%k ==0) ans =0;
+        else{
+            ans = min(ans,k - (x%k));
         }
-        cout<<ans<<"\n";
     }
-    
+
+    if(k == 4){
+        ans = min(ans, max(0,2-even));
+    }
+    cout<<ans<<endl;
 }
 
 int main() {
