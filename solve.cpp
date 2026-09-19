@@ -3,18 +3,19 @@ using namespace std;
 
 
 void solve(){
-    int n,k;
-    cin>>n>>k;
+    int n;
+    cin>>n;
+    
+    if(n ==0) {cout<<1<<endl;
 
-    if(k != 10){
-        for(int i = 1;i<=n ;i++) cout<<k;
-    }
-    else if( n == 1) cout<< -1;
-    else{
-        cout<<1;
-        for(int i =1;i<n;i++) cout<<0;
-    }
-    cout<<endl;
+}
+else{
+    n = n%4;
+    if(n == 1) cout<<8<<endl;
+    else if(n == 2 ) cout<<4<<endl;
+    else if(n == 3) cout<<2<<endl;
+    else cout<<6<<endl;
+}
 }
 
 int main() {
