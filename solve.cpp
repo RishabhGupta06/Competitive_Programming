@@ -1,33 +1,53 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void solve()
+{
+    int n, k, q;
+    cin >> n >> k >> q;
 
-void solve(){
-    int n,k;
-    cin>>n>>k;
-    int x = n/2;
-    int m = x + (n - x*2);
-    if(n<k) cout<<-1<<endl;
-    else{
-        if(m %k == 0) cout<<m<<endl;
-        else{
-            int z = m%k;
-            cout<<m+k-z<<endl;
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    long long start = 1;
+    long long ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] <= q)
+        {
+            start++;
+        }
+        else
+        {
+           long long dif = start;
+            if (dif >= k)
+            {
+                ans += (dif - k) * (dif + 1) - (dif * (dif + 1) / 2 - (k * (k + 1) / 2));
+            }
+            start = 1;
         }
     }
-    
+    long long dif = start;
+    if (dif >= k)
+        ans += (dif - k) * (dif + 1) - (dif * (dif + 1) / 2 - (k * (k + 1) / 2));
+
+    cout << ans << endl;
 }
 
-int main() {
+int main()
+{
     // Fast I/O
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    // int t;
-    // cin >> t;
-//    while (t--) {
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
         solve();
-    // }
-    
+    }
+
     return 0;
 }
