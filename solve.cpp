@@ -1,39 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool cmp(pair<long long, int> a, pair<long long, int> b) {
+if (a.first == b.first) return a.second < b.second; // Tie: smaller index first
+return a.first > b.first; // Primary: larger health first
+}
 void solve()
 {
-    int n, k, q;
-    cin >> n >> k >> q;
+    long long n,k;
+    cin>>n>>k;
 
-    vector<int> arr(n);
 
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
+    vector<pair<long long,int>>p(n);
+    for(int i =0;i<n;i++){
+        long long x;
+        cin>>x;
 
-    long long start = 1;
-    long long ans = 0;
-    for (int i = 0; i < n; i++)
-    {
-        if (arr[i] <= q)
-        {
-            start++;
-        }
-        else
-        {
-           long long dif = start;
-            if (dif >= k)
-            {
-                ans += (dif - k) * (dif + 1) - (dif * (dif + 1) / 2 - (k * (k + 1) / 2));
-            }
-            start = 1;
-        }
+        p[i] = {x%k,i+1};
+        
+
+        if(x%k == 0) p[i].first = k;
+
     }
-    long long dif = start;
-    if (dif >= k)
-        ans += (dif - k) * (dif + 1) - (dif * (dif + 1) / 2 - (k * (k + 1) / 2));
 
-    cout << ans << endl;
+    sort(p.begin(),p.end(),cmp);
+    for(int i =0;i<p.size();i++){
+        cout<<p[i].second<<" ";
+    }
+    cout<<endl;
+
 }
 
 int main()
