@@ -6,26 +6,23 @@ void solve()
 {
     int n;
     cin>>n;
+    map<string,int> m;
 
-    vector<pair<int,int>> arr(n);
-
-    for(int i = 0;i<n;i++){
-        cin>>arr[i].first;
-        arr[i].second = (i+1)%2 ;
-    }
-    int l = 1, r = n;
-    bool flag = true;
-    sort(arr.begin(),arr.end());
     for(int i =0;i<n;i++){
-        if(arr[i].second == l %2 ) l++;
-        else if(arr[i].second == r%2) r--;
-        else{
-            cout<<"No"<<endl;
-            flag = false;
-            break;
+
+        string s;
+        cin>>s;
+        if(m.find(s) != m.end()){
+            cout<<s+to_string(m[s])<<endl;
         }
+        else{
+            cout<<"OK"<<endl;
+        }
+        m[s]++;
+
     }
-    if(flag) cout<<"Yes"<<endl;
+
+
 }
 
 int main()
@@ -34,12 +31,12 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int t;
-    cin >> t;
-    while (t--)
-    {
+    // int t;
+    // cin >> t;
+    // while (t--)
+    // {
         solve();
-    }
+    // }
 
     return 0;
 }
