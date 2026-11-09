@@ -3,44 +3,59 @@ using namespace std;
 
 void solve()
 {
-    long long n,t;
-    cin>>n>>t;
+    int n, m;
+    cin >> n >> m;
 
-    vector<int> arr(n);
+    string a, b;
+    cin >> a >> b;
 
-    for(int i =0;i<n;i++) cin>>arr[i];
-    int size =0;
-    // using sliding window
-    int i =0,j =0;
-    int sum =0;
-
-    while(i<n){
-        sum += arr[i];
-        if(sum > t){
-            sum -= arr[j];
-            j++;
-        }
-        else{
-            size = max(size,i-j+1);
-        }
-        i++;
-
+    if(n-m != 3){
+        cout<<"No\n";
+        return;
     }
-    cout<<size<<endl;
-}
 
+    vector<int> counta(26,0);
+    vector<int> countb(26,0);
+
+
+    for(char c: a) counta[c-'a']++;
+    for(char c: b) countb[c-'a']++;
+
+    for(int i =0;i<26;i++){
+        int rem = counta[i] - countb[i];
+
+        if(rem <0){
+            cout<<"No\n";
+            return;
+        }
+
+        char c = i+'a';
+        if(c == 's' || c == 'i' || c == 'x'){
+            if(rem != 1){
+                cout<<"No\n";
+                return;
+            }
+        }else{
+            if(rem != 0){
+                cout<<"No\n";
+                return;
+            }
+        }
+    }
+    cout<<"Yes\n";
+}
 int main()
 {
     // Fast I/O
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    // int t;
-    // cin >> t;
-    // while (t--)
-    // {
+    int t;
+    cin >> t;
+    while (t--)
+    {
         solve();
-    // }
+    }
 
     return 0;
 }
